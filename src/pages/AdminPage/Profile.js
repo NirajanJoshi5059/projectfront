@@ -20,7 +20,7 @@ const Profile = () => {
         gender: Yup.string().required("Select gender"),
         dob: Yup.string().required('Birthday must be filled'),
         country : Yup.string().required('Select country'),
-        hobby : Yup.array().length(1).required("Choose hobby"),
+        hobby : Yup.array().min(1).required("Choose hobby"),
 
     });
 
@@ -56,21 +56,21 @@ const Profile = () => {
                         name="username"
                         value={formik.values.username}
                         size="lg" label="User Name" />
-                    {formik.errors.username && <h1 className="text-red-700">{formik.errors.username}</h1>}
+                    {formik.errors.username && formik.touched.username && <h1 className="text-red-700">{formik.errors.username}</h1>}
 
                     <Input
                         onChange={formik.handleChange}
                         name="email"
                         value={formik.values.email}
                         size="lg" label="Email" />
-                    {formik.errors.email && <h1 className="text-red-700">{formik.errors.email}</h1>}
+                    {formik.errors.email && formik.touched.email && <h1 className="text-red-700">{formik.errors.email}</h1>}
 
                     <Input
                         onChange={formik.handleChange}
                         name="password"
                         value={formik.values.password}
                         type="password" size="lg" label="Password" />
-                    {formik.errors.password && <h1 className="text-red-700">{formik.errors.password}</h1>}
+                    {formik.errors.password && formik.touched.password && <h1 className="text-red-700">{formik.errors.password}</h1>}
                 </div>
 
                 <div>
@@ -83,7 +83,7 @@ const Profile = () => {
                                 label={gen.label} value={gen.value} name="gender" key={i} />
                         })};
                     </div>
-                    {formik.errors.gender && <h1 className="text-red-700">{formik.errors.gender}</h1>}
+                    {formik.errors.gender && formik.touched.gender && <h1 className="text-red-700">{formik.errors.gender}</h1>}
                 </div>
 
                 <div>
@@ -97,7 +97,7 @@ const Profile = () => {
                             value={formik.values.dob}
                             type="date" size="lg" label="DOB" />
                     </div>
-                    {formik.errors.dob && <h1 className="text-red-700">{formik.errors.dob}</h1>}
+                    {formik.errors.dob && formik.touched.dob && <h1 className="text-red-700">{formik.errors.dob}</h1>}
                 </div>
 
                 <div>
@@ -112,7 +112,7 @@ const Profile = () => {
                             })}
                         </Select>
                     </div>
-                    {formik.errors.country && <h1 className="text-red-700">{formik.errors.country}</h1>}
+                    {formik.errors.country && formik.touched.country && <h1 className="text-red-700">{formik.errors.country}</h1>}
                 </div>
 
                 <div>
@@ -126,7 +126,7 @@ const Profile = () => {
                                 onChange={formik.handleChange} />
                         })}
                     </div>
-                    {formik.errors.hobby && <h1 className="text-red-700">{formik.errors.hobby}</h1>}
+                    {formik.errors.hobby && formik.touched.hobby && <h1 className="text-red-700">{formik.errors.hobby}</h1>}
                 </div>
 
 

@@ -39,14 +39,14 @@ const Login = () => {
                         name="email"
                         value={formik.values.email}
                         size="lg" label="Email" />
-                    {formik.errors.email && <h1 className="text-red-900">{formik.errors.email}</h1>}
+                    {formik.errors.email && formik.touched.email && <h1 className="text-red-900">{formik.errors.email}</h1>}
 
                     <Input
                         onChange={formik.handleChange}
                         name="password"
                         value={formik.values.password}
                         type="password" size="lg" label="Password" />
-                    {formik.errors.password && <h1 className="text-red-900">{formik.errors.password}</h1>}
+                    {formik.errors.password && formik.touched.password && <h1 className="text-red-900">{formik.errors.password}</h1>}
                 </div>
 
                 <Button type="submit" className="mt-6 bg-blue-gray-800 hover:bg-blue-gray-700 " fullWidth>

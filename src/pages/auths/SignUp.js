@@ -15,6 +15,8 @@ const SignUp = () => {
     username : Yup.string().required("Username must be filled"),
     email : Yup.string().required("Email must be filled"),
     password : Yup.string().min(6).max(25).required("Password must be filled"),
+    gender: Yup.string().required("Select gender"),
+    dob: Yup.string().required("Birthday must be filled"),
 
   });
 
@@ -46,21 +48,21 @@ const SignUp = () => {
             name="username"
             value={formik.values.username}
             size="lg" label="User Name" />
-            {formik.errors.username && <h1 className="text-red-700">{formik.errors.username}</h1>}
+            {formik.errors.username && formik.touched.username && <h1 className="text-red-700">{formik.errors.username}</h1>}
 
           <Input
             onChange={formik.handleChange}
             name="email"
             value={formik.values.email}
             size="lg" label="Email" />
-             {formik.errors.email && <h1 className="text-red-700">{formik.errors.email}</h1>}
+             {formik.errors.email && formik.touched.email && <h1 className="text-red-700">{formik.errors.email}</h1>}
 
           <Input
             onChange={formik.handleChange}
             name="password"
             value={formik.values.password}
             type="password" size="lg" label="Password" />
-             {formik.errors.password && <h1 className="text-red-700">{formik.errors.password}</h1>}
+             {formik.errors.password && formik.touched.password && <h1 className="text-red-700">{formik.errors.password}</h1>}
         </div>
 
         <div>
@@ -73,6 +75,7 @@ const SignUp = () => {
               label={gen.label} value={gen.value} name="gender" key={i} />
             })};
           </div>
+          {formik.errors.gender && formik.touched.gender && <h1 className="text-red-700">{formik.errors.gender}</h1>}
         </div>
 
         <div>
@@ -86,6 +89,7 @@ const SignUp = () => {
             value={formik.values.dob}
              type="date" size="lg" label="DOB" />
           </div>
+          {formik.errors.dob && formik.touched.dob && <h1 className="text-red-700">{formik.errors.dob}</h1>}
         </div>
 
         <Button type="submit" className="bg-light-green-700 mt-6 content-center hover:bg-light-green-500" fullWidth>
