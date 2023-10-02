@@ -8,9 +8,12 @@ import { useFormik } from "formik";
 import React from 'react'
 import * as Yup from 'yup';
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { addOrUpdateUser } from "../../features/userSlice";
 
 const Login = () => {
     const nav = useNavigate();
+    const dispatch = useDispatch();
     const userSchema = Yup.object().shape({
         email: Yup.string().required("Email must be filled"),
         password: Yup.string().min(6).max(25).required("Password must be filled"),
@@ -21,7 +24,8 @@ const Login = () => {
             password: '',
         },
         onSubmit: (val) => {
-            console.log(val);
+            dispatch(addOrUpdateUser(val));
+            nav('/')
         },
         validationSchema: userSchema
     })
