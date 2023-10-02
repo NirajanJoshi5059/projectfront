@@ -1,31 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getUser, setUser } from "./localStorage";
 
 const initialState ={
-    users:[]
+    users: getUser()
 }
 const userSlice = createSlice({
     name : 'userInfo',
     initialState,
 
     reducers:{
-        addOrUpdateUser: (state, action)=>{
+        addUser: (state, action)=>{
             // initialState = state => (initialState.users = state.users)
             state.users.push(action.payload);
+            setUser(state.users);
         },
 
-        userUpdate:(state, action) =>{
-
+        updateUser:(state, action) =>{
+            state.users = state.users.map((user)=> user.id === action.payload.id ? action.payload : user);
+            setUser(state.users);
         },
 
-        clearUser:(state, action) =>{
-
+        removeUser:(state, action) =>{
+            state.users.splice(action.payload, 1);
+            setUser(state.users);
         },
     }
     
 });
 
 
-export const {addOrUpdateUser, userUpdate, clearUser} = userSlice.actions;
+export const {addUser, updateUser, removeUser} = userSlice.actions;
 
 // userSlice => reducers
 export default userSlice.reducer;

@@ -6,7 +6,8 @@ import cartReducer from './cartSlice';
 export const store = configureStore({
 
     reducer:{
-        'user' : userReducer,
-        'cart' : cartReducer,
+        // usersInfo is used when useSelector hook is called 
+        'usersInfo' : userReducer,
+        'cartsInfo' : cartReducer,
     }
 }); 
