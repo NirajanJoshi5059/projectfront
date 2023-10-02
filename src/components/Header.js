@@ -67,8 +67,8 @@ const Header = () => {
                 <div className="flex items-center space-x-5">
                     <div className="space-x-5">
                         <NavLink to='/about'>About</NavLink>
-                        <NavLink to='/contact'>Contact</NavLink>
-                        <NavLink to='/login'>Login</NavLink>
+                        <NavLink to='/user/profile'>Profile</NavLink>
+                        <NavLink to='/user/login'>Login</NavLink>
                     </div>
 
 
