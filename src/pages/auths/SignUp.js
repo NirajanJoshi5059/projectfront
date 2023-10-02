@@ -7,9 +7,31 @@ import {
 } from "@material-tailwind/react";
 import React from 'react'
 import { gender } from "../../features/constants";
+import * as Yup from 'yup';
+import { useFormik } from "formik";
 
 const SignUp = () => {
- 
+  const userSchema = Yup.object().shape({
+    username : Yup.string().required("Username must be filled"),
+    email : Yup.string().required("Email must be filled"),
+    password : Yup.string().min(6).max(25).required("Password must be filled"),
+
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      username: '',
+      email: '',
+      password: '',
+      gender: '',
+      dob: '',
+    },
+    onSubmit: (val) => {
+      console.log(val);
+    },
+    validationSchema: userSchema
+  })
+
   return (
 
     <Card color="transparent" shadow={false} className="max-w-lg mx-auto mt-6">
@@ -17,11 +39,28 @@ const SignUp = () => {
         SIGN UP
       </Typography>
 
-      <form className="mt-8 mb-2">
-        <div className="mb-4 flex flex-col gap-6">
-          <Input size="lg" label="User Name" />
-          <Input size="lg" label="Email" />
-          <Input type="password" size="lg" label="Password" />
+      <form onSubmit={formik.handleSubmit} className="mt-8 mb-2">
+        <div className="mb-4 flex flex-col gap-4">
+          <Input
+            onChange={formik.handleChange}
+            name="username"
+            value={formik.values.username}
+            size="lg" label="User Name" />
+            {formik.errors.username && <h1 className="text-red-700">{formik.errors.username}</h1>}
+
+          <Input
+            onChange={formik.handleChange}
+            name="email"
+            value={formik.values.email}
+            size="lg" label="Email" />
+             {formik.errors.email && <h1 className="text-red-700">{formik.errors.email}</h1>}
+
+          <Input
+            onChange={formik.handleChange}
+            name="password"
+            value={formik.values.password}
+            type="password" size="lg" label="Password" />
+             {formik.errors.password && <h1 className="text-red-700">{formik.errors.password}</h1>}
         </div>
 
         <div>
@@ -29,8 +68,9 @@ const SignUp = () => {
             Gender
           </Typography>
           <div className="flex gap-28">
-            {gender.map((gen, i)=> {
-              return <Radio color={gen.color} label={gen.label} value={gen.value} name="gender" key={i}/>
+            {gender.map((gen, i) => {
+              return <Radio onChange={formik.handleChange} color={gen.color} 
+              label={gen.label} value={gen.value} name="gender" key={i} />
             })};
           </div>
         </div>
@@ -40,7 +80,11 @@ const SignUp = () => {
             Birthday
           </Typography>
           <div className="mt-3">
-            <Input type="date" size="lg" label="DOB" />
+            <Input
+            onChange={formik.handleChange}
+            name="dob"
+            value={formik.values.dob}
+             type="date" size="lg" label="DOB" />
           </div>
         </div>
 
