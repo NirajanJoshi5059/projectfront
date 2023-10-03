@@ -26,7 +26,11 @@ const Profile = () => {
         dob: Yup.string().required('Birthday must be filled'),
         country: Yup.string().required('Select country'),
         hobby: Yup.array().min(1).required("Choose hobby"),
-        image : '',
+        image: '',
+        imageFile : Yup.mixed().test('invalid image', (val)=> {
+            // console.log(val);
+            return ['image/jpg', 'image/jpeg', 'image/png'].includes(val.type)
+        }).required(),
 
     });
 
@@ -40,7 +44,7 @@ const Profile = () => {
             country: '',
             hobby: [],
             image: '',
-            preview: '',
+            imageFile: null,
         },
         onSubmit: (val) => {
             dispatch(updateUser(val));
@@ -141,9 +145,10 @@ const Profile = () => {
                     <Typography color="black" className="mt-3 font-normal">
                         Image
                     </Typography>
-                    <Input name="image" type="file"
+                    <Input name="imageFile" type="file"
                         onChange={(e) => {
                             const file = e.target.files[0];
+                            formik.setFieldValue('imageFile',file);
                             const reader = new FileReader();
                             reader.readAsDataURL(file);
                             reader.addEventListener('load', (e) => {
@@ -151,6 +156,8 @@ const Profile = () => {
                             })
                         }} />
                     {formik.values.image && <img src={formik.values.image} alt="" />}
+                    {formik.errors.imageFile && formik.touched.imageFile && <h1 className="text-red-700">{formik.errors.imageFile}</h1>}
+
                 </div>
 
 
