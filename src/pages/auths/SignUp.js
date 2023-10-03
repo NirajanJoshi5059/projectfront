@@ -105,7 +105,7 @@ const SignUp = () => {
         <Button type="submit" className="bg-light-green-700 mt-6 content-center hover:bg-light-green-500" fullWidth>
           Register
         </Button>
-        <Typography color="gary" className="mt-4 text-center font-normal">
+        <Typography color="gray" className="mt-4 text-center font-normal">
           Already have an account?{" "}
           <a href="/user/login" className="font-semibold text-gray-900">
             Sign In

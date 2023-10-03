@@ -26,7 +26,7 @@ const Login = () => {
             password: '',
         },
         onSubmit: (val) => {
-            dispatch(addUser(val));
+            // dispatch(addUser(val));
             nav('/')
         },
         validationSchema: userSchema

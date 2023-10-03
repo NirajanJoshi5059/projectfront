@@ -8,6 +8,7 @@ import About from './pages/About'
 import Login from './pages/auths/Login'
 import SignUp from './pages/auths/SignUp'
 import Profile from './pages/AdminPage/Profile'
+import UpdateSignUp from './pages/auths/UpdateSignUp'
 
 
 
@@ -21,6 +22,7 @@ const App = () => {
         <Route path='contact' element={<Loading />} />
         <Route path='user/login' element={<Login />} />
         <Route path='user/register' element={<SignUp />} />
+        <Route path='user/update/:id' element={<UpdateSignUp />} />
         <Route path='user/profile' element={<Profile />} />
         <Route path="*" element={<NotFound/>} />
       </Route>

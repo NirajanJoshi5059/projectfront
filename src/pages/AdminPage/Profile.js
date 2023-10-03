@@ -9,18 +9,24 @@ import React from 'react';
 import * as Yup from 'yup';
 import { checkData, countries, gender, } from '../../features/constants';
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { updateUser } from "../../features/userSlice";
 
 
 const Profile = () => {
+    const dispatch = useDispatch();
+    const nav = useNavigate();
 
     const userSchema = Yup.object().shape({
         username: Yup.string().required("Username must be filled"),
-        email : Yup.string().required("Email must be filled"),
-        password : Yup.string().min(6).max(25).required("Password must be filled"),
+        email: Yup.string().required("Email must be filled"),
+        password: Yup.string().min(6).max(25).required("Password must be filled"),
         gender: Yup.string().required("Select gender"),
         dob: Yup.string().required('Birthday must be filled'),
-        country : Yup.string().required('Select country'),
-        hobby : Yup.array().min(1).required("Choose hobby"),
+        country: Yup.string().required('Select country'),
+        hobby: Yup.array().min(1).required("Choose hobby"),
+        image : '',
 
     });
 
@@ -31,15 +37,16 @@ const Profile = () => {
             password: '',
             gender: '',
             dob: '',
-            country : '',
-            hobby : [],
-            image : '',
+            country: '',
+            hobby: [],
+            image: '',
             preview: '',
-          },
-          onSubmit: (val) => {
-            console.log(val);
-          },
-          validationSchema: userSchema
+        },
+        onSubmit: (val) => {
+            dispatch(updateUser(val));
+            nav(-1);
+        },
+        validationSchema: userSchema
     });
 
 
